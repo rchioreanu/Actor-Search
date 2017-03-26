@@ -23,13 +23,19 @@ class	movies
 	public	$id_m;
 }
 
-function	add_name($name, $i)
-{
-	$new = readline("Introduceti noul nume: ");
-	$actors->nume[$i] = $new;
-}
+$actors = new actors();
+$movies = new movies();
 
-function	add_surname($surname, $i)
+function	check_year($year)
+{
+	$re = '/^\d{4}$/';
+	$str = $year;
+	if (!preg_match($re, $str, $matches))
+		return (false);
+	if ($year > 2017 || $year < 1878)
+		return (false);
+	return (true);
+}
 
 function	check_date($ddmmyy)
 {
@@ -53,19 +59,61 @@ function	check_date($ddmmyy)
 	return (TRUE);
 }
 
-function	check_year($year)
+function	add_name($i)
 {
-	$re = '/^\d{4}$/';
-	$str = $year;
-	if (!preg_match($re, $str, $matches))
-		return (false);
-	if ($year > 2017 || $year < 1878)
-		return (false);
-	return (true);
+	$new = readline("Introduceti noul nume: ");
+	$actors->nume[$i] = $new;
 }
 
-$actors = new actors();
-$movies = new movies();
+function	add_surname($i)
+{
+	$new = readline("Introduceti noul prenume: ");
+	$actors->prenume = $new;
+}
+
+function	add_data($i)
+{
+	$new = readline("Introduceti data: ");
+	while (!check_date($new))
+		$new = readline("Introduceti data: ");
+	$actors->date[$i] = $new;
+}
+
+function	add_nationality($i)
+{
+	$new = readline("Introduceti nationalitatea: ");
+	$actors->nationalitate[$i] = $new;
+}
+
+function	add_city($i)
+{
+	$new = readline("Introduceti nationalitatea: ");
+	$actors->oras[$i] = $new;
+}
+
+function	add_height($i)
+{
+	$new = readline("Introduceti inaltimea: ");
+	$actors->inaltime[$i] = $new;
+}
+
+function	add_weight($i)
+{
+	$new = readline("Introduceti greutatea: ");
+	$actors->greutate[$i] = $new;
+}
+
+function	add_email($i)
+{
+	$new = readline("Introduceti email-ul: ");
+	$actors->email[$i] = $new;
+}
+
+function	add_phone($i)
+{
+	$new = readline("Introduceti numarul de telefon: ");
+	$actors->telefon[$i] = $new;
+}
 
 @$file1 = fopen($argv[1], "r") or die("ERROR\n");
 @$file2 = fopen($argv[2], "r") or die("ERROR\n");
