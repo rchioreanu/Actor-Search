@@ -1,120 +1,9 @@
-#!/usr/bin/php
 <?php
-
-class	actors
-{
-	public	$nume;
-	public	$prenume;
-	public	$data;
-	public	$nationalitate;
-	public	$oras;
-	public	$inaltine;
-	public	$greutate;
-	public	$email;
-	public	$telefon;
-	public	$id;
-}
-
-class	movies
-{
-	public	$denumire;
-	public	$aparitie;
-	public	$website;
-	public	$id_m;
-}
-
-$actors = new actors();
-$movies = new movies();
-
-function	check_year($year)
-{
-	$re = '/^\d{4}$/';
-	$str = $year;
-	if (!preg_match($re, $str, $matches))
-		return (false);
-	if ($year > 2017 || $year < 1878)
-		return (false);
-	return (true);
-}
-
-function	check_date($ddmmyy)
-{
-
-	$re = '/^(\d|([0-2]\d)|3[0-1])\/(0\d|\d|1[0-2])\/((18[7-9][8-9])|(19\d\d)|200\d|201[0-7])$/';
-	$str = $ddmmyy;
-	if (!preg_match($re, $str))
-		return (FALSE);
-	$date = explode("/", $ddmmyy);
-	if ($date[2] % 4 != 0 && $date[1] == 2 && $date[0] > 28)
-		return (FALSE);
-	if ($date[2] % 4 == 0 && $date[1] == 2 && $date[0] > 29)
-		return (FALSE);
-	if (($date[1] == 1 || $date[1] == 3 || $date[1] == 5 
-		|| $date[1] == 7 || $date[1] == 8 || $date[1] == 10
-		|| $date[1] == 12) && $date[0] > 31)
-		return (FALSE);
-	if (($date[1] == 4 || $date[1] == 6 || $date[1] == 9
-		|| $date[1] == 11 || $date[1]) && $date[0] > 30)
-		return (FALSE);
-	return (TRUE);
-}
-
-function	add_name($i)
-{
-	$new = readline("Introduceti noul nume: ");
-	$actors->nume[$i] = $new;
-}
-
-function	add_surname($i)
-{
-	$new = readline("Introduceti noul prenume: ");
-	$actors->prenume = $new;
-}
-
-function	add_data($i)
-{
-	$new = readline("Introduceti data: ");
-	while (!check_date($new))
-		$new = readline("Introduceti data: ");
-	$actors->date[$i] = $new;
-}
-
-function	add_nationality($i)
-{
-	$new = readline("Introduceti nationalitatea: ");
-	$actors->nationalitate[$i] = $new;
-}
-
-function	add_city($i)
-{
-	$new = readline("Introduceti nationalitatea: ");
-	$actors->oras[$i] = $new;
-}
-
-function	add_height($i)
-{
-	$new = readline("Introduceti inaltimea: ");
-	$actors->inaltime[$i] = $new;
-}
-
-function	add_weight($i)
-{
-	$new = readline("Introduceti greutatea: ");
-	$actors->greutate[$i] = $new;
-}
-
-function	add_email($i)
-{
-	$new = readline("Introduceti email-ul: ");
-	$actors->email[$i] = $new;
-}
-
-function	add_phone($i)
-{
-	$new = readline("Introduceti numarul de telefon: ");
-	$actors->telefon[$i] = $new;
-}
-
+include 'checkers.php';
+include 'classes.php';
+include 'add_functions.php';
+$actors = new actor();
+$movies = new movie();
 @$file1 = fopen($argv[1], "r") or die("ERROR\n");
 @$file2 = fopen($argv[2], "r") or die("ERROR\n");
 if ($file1 && $file2)
@@ -127,34 +16,16 @@ if ($file1 && $file2)
 		$actors->prenume[$i] = $map1[1];
 		if (check_date($map1[2]))
 			$actors->data[$i] = $map1[2];
-		else
-			$actors->data[$i] = 'ERROR';
 		$actors->nationalitate[$i] = $map1[3];
 		$actors->oras[$i] = $map1[4];
-		$re = '/^[0-2]\.([0-9]?[0-9]?[0-9])$/';
-		$str = $map1[5];
-		if (preg_match($re, $str, $matches))
+		if (check_height($map1[5]))
 			$actors->inaltime[$i] = $map1[5];
-		else
-			$actors->inaltime[$i] = "ERROR";
-		$re = '/^\d{1,3}$|(\d{1,3}\.\d{1,3})$/';
-		$str = $map1[6];
-		if (preg_match($re, $str, $matches))
+		if (check_weight($map1[6]))
 			$actors->greutate[$i] = $map1[6];
-		else
-			$actors->greutate[$i] = "ERROR";
-		$re = '/^\w+\@\w+$/';
-		$str = $map1[7];
-		if (preg_match($re, $str, $matches))
+		if (check_email($map1[7]))
 			$actors->email[$i] = $map1[7];
-		else
-			$actors->email[$i] = "ERROR";
-		$re = '/^\d{10}$/';
-		$str = $map1[8];
-		if (preg_match($re, $str, $matches))
+		if (check_phone($map1[8]))
 			$actors->telefon[$i] = $map1[8];
-		else
-			$actors->telefon[$i] = "ERROR";
 		$actors->id = $i + 1;
 		$i++;
 	}
@@ -180,7 +51,7 @@ if ($file1 && $file2)
 	$movies_nr = $i;
 	@fclose($file1);
 	@fclose($file2);
-	printf("\e[1;1H\e[2J");
+/*	printf("\e[1;1H\e[2J");
 	echo "Actor search v. 0.1"."\n";
 	printf("Salut!\n\n");
 	printf("Pentru a vedea detalii despre un actor apasa (1)\n");
@@ -259,9 +130,11 @@ if ($file1 && $file2)
 		if ($ok == 1)
 		{
 			$camp = readline("Introduceti campul pe care doriti sa il modificati: ");
-			if (strcasecmp($camp, "Nume") == 0)
-			else if (str
+			//	if (strcasecmp($camp, "Nume") == 0)
+			//	else if (str
 		}
+	//	$actors->put_class_to_file();
+		/*
 		for ($i = 0; $i < $actors_nr; $i++)
 		{
 			$map[$i][0] = $actors->nume[$i];
@@ -280,6 +153,7 @@ if ($file1 && $file2)
 			$s2 = ($i == 0) ? $s2 = $s2.$str : $s2."\n".$str;
 		}
 		file_put_contents("./file_test.csv", $s2);
-	}
+ */
+//	}
 }
 ?>
