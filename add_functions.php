@@ -1,5 +1,5 @@
 <?php
-
+include_once 'includes.php';
 function	add_name($i)
 {
 	$new = readline("Introduceti noul nume: ");

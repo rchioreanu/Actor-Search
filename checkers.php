@@ -1,4 +1,5 @@
 <?php
+include_once 'includes.php';
 function	check_height($height)
 {
 	if (!preg_match('/^[0-2]\.([0-9]?[0-9]?[0-9])$/', $height, $matches))
