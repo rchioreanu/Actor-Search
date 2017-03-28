@@ -4,6 +4,7 @@ include_once 'includes.php';
 function	search_actor($actors)
 {
 	$nume = readline("Introduceti numele actorului (case insensitive): ");
+	$actors->citire = $nume;
 	for ($i = 0; $i < $actors->id; $i++)
 	{
 		if (strcasecmp($nume, $actors->nume[$i]) == 0)
@@ -23,7 +24,6 @@ function	search_actor($actors)
 	}
 	if ($ok == 0)
 	{
-		echo "Nu a fost gasit"."\n";
 		return (-1);
 	}
 }
@@ -31,6 +31,7 @@ function	search_actor($actors)
 function	search_movie($movies)
 {
 	$film = readline("Introduceti numele filmului (case insensitive): ");
+	$movies->citire = $film;
 	for ($i = 0; $i < $movies->id_m; $i++)
 	{
 		if (strcasecmp($film, $movies->denumire[$i]) == 0)

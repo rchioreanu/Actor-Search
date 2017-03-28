@@ -7,6 +7,20 @@ function	check_height($height)
 	return (TRUE);
 }
 
+function	check_website($website)
+{
+	if (!preg_match('/www\.\w+\.\w+/', $webiste, $matches))
+		return (FALSE);
+	return (TRUE);
+}
+
+function	check_city($city)
+{
+	if (!preg_match('/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/', $city, $matches))
+		return (FALSE);
+	return (TRUE);
+}
+
 function	check_weight($weight)
 {
 	if (!preg_match('/^\d{1,3}$|(\d{1,3}\.\d{1,3})$/', $weight, $matches))
@@ -16,7 +30,7 @@ function	check_weight($weight)
 
 function	check_email($email)
 {
-	if (!preg_match('/^\w+\@\w+$/', $email, $matches))
+	if (!preg_match('/^\w+\@\w+\.\w+$/', $email, $matches))
 		return (FALSE);
 	return (TRUE);
 }

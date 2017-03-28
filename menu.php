@@ -25,7 +25,10 @@ else if ($line == 2)
 	search_movie($movies);
 
 else if ($line == 3)
+{
+	$actors->filename = $argv[1];
 	add_field_actors($actors);
+}
 
 else if ($line == 4)
 	add_field_movies($movies);

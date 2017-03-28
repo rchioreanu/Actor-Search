@@ -12,6 +12,8 @@ class	actor
 	public	$email;
 	public	$telefon;
 	public	$id;
+	public	$citire;
+	public	$filename;
 }
 
 class	movie
@@ -20,5 +22,7 @@ class	movie
 	public	$aparitie;
 	public	$website;
 	public	$id_m;
+	public	$citire;
+	public	$filename;
 }
 ?>

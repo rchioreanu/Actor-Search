@@ -6,4 +6,5 @@ include_once 'citire.php';
 include_once 'classes.php';
 include_once 'inserare.php';
 include_once 'menu.php';
+include_once 'utilities.php';
 ?>
