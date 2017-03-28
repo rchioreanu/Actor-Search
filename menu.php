@@ -31,5 +31,8 @@ else if ($line == 3)
 }
 
 else if ($line == 4)
+{
+	$movies->filename = $argv[2];
 	add_field_movies($movies);
+}
 ?>

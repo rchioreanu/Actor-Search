@@ -9,7 +9,7 @@ function	check_height($height)
 
 function	check_website($website)
 {
-	if (!preg_match('/www\.\w+\.\w+/', $webiste, $matches))
+	if (!preg_match('/www\.\w+\.\w+/', $website, $matches))
 		return (FALSE);
 	return (TRUE);
 }

@@ -55,13 +55,9 @@ function	add_field_movies($movies)
 	while (!check_year($aparitie))
 		$aparitie = readline("Introduceti anul aparitiei: ");
 	$movies->aparitie[$i] = $aparitie;
-	$web = readline("Introduceti website-ul: ");
-	while (!check_year($aparitie))
-		$aparitie = readline("Introduceti anul aparitiei: ");
-	$movies->aparitie[$i] = $aparitie;
 	$website = readline("Introduceti web-ul: ");
 	while (!check_website($website))
-		$website = readline("Introduceti web-ul ");
+		$website = readline("Introduceti web-ul: ");
 	$movies->website[$i] = $website;
 	echo "\nDoriti sa salvati in fisier?(y/n)\n";
 	$choice = readline("Introduceti optiunea dumneavoastra: ");
@@ -69,6 +65,12 @@ function	add_field_movies($movies)
 	{
 		echo "Exiting...\n";
 		exit (0);
+	}
+	if ($choice == "Y" || $choice == "y")
+	{
+		$file = fopen($movies->filename, 'a');
+		$data = $movies->denumire[$i].",".$movies->aparitie[$i].",".$movies->website[$i].",";
+		fwrite($file, $data);
 	}
 }
 
