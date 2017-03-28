@@ -18,13 +18,13 @@ function	search_actor($actors)
 			echo "Greutate: ".$actors->greutate[$i]."\n";
 			echo "Email: ".$actors->email[$i]."\n";
 			echo "Telefon: ".$actors->telefon[$i]."\n";
-			return (TRUE);
+			return ($i);
 		}
 	}
 	if ($ok == 0)
 	{
 		echo "Nu a fost gasit"."\n";
-		return (FALSE);
+		return (-1);
 	}
 }
 
@@ -39,13 +39,13 @@ function	search_movie($movies)
 			echo "An aparitie: ".$movies->aparitie[$i]."\n";
 			echo "Website: ".$movies->website[$i]."\n";
 			$ok = 1;
-			return (TRUE);
+			return ($i);
 		}
 	}
 	if ($ok == 0)
 	{
 		echo "Nu a fost gasit"."\n";
-		return (FALSE);
+		return (-1);
 	}
 }
 ?>
