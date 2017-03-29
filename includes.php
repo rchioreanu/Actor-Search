@@ -7,4 +7,5 @@ include_once 'classes.php';
 include_once 'inserare.php';
 include_once 'menu.php';
 include_once 'utilities.php';
+include_once 'stergere.php';
 ?>

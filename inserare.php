@@ -3,8 +3,19 @@ include_once 'includes.php';
 
 function	add_field_actors($actors)
 {
-	while (($pos = search_actor($actors)) >= 0)
-		echo "Exista\n";
+	while (($pos = search_actor($actors)) != -1)
+	{
+		echo "Doriti sa stergeti aceasta intrare?(Y/N)\n";
+		$choice = readline("Introduceti optiunea: ");
+		if ($choice == 'Y' || $choice == 'y')
+		{
+			echo "stergere...\n";
+			delete_actor($actors, $pos);
+			return ;
+		}
+		else
+			echo "anulare...\n";
+	}
 	$i = get_actors_length($actors);
 	$actors->nume[$i] = $actors->citire;
 	$actors->prenume[$i] = readline("Introduceti prenumele: ");
@@ -55,9 +66,9 @@ function	add_field_movies($movies)
 	while (!check_year($aparitie))
 		$aparitie = readline("Introduceti anul aparitiei: ");
 	$movies->aparitie[$i] = $aparitie;
-	$website = readline("Introduceti web-ul: ");
+	$website = readline("Introduceti website-ul: ");
 	while (!check_website($website))
-		$website = readline("Introduceti web-ul: ");
+		$website = readline("Introduceti website-ul: ");
 	$movies->website[$i] = $website;
 	echo "\nDoriti sa salvati in fisier?(y/n)\n";
 	$choice = readline("Introduceti optiunea dumneavoastra: ");

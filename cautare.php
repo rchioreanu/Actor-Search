@@ -23,9 +23,7 @@ function	search_actor($actors)
 		}
 	}
 	if ($ok == 0)
-	{
 		return (-1);
-	}
 }
 
 function	search_movie($movies)
@@ -44,9 +42,6 @@ function	search_movie($movies)
 		}
 	}
 	if ($ok == 0)
-	{
-		echo "Nu a fost gasit"."\n";
 		return (-1);
-	}
 }
 ?>
