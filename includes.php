@@ -1,5 +1,4 @@
 <?php
-include_once 'add_functions.php';
 include_once 'cautare.php';
 include_once 'checkers.php';
 include_once 'citire.php';

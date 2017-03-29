@@ -25,7 +25,21 @@ function	delete_actor($actors, $pos)
 	fclose($file);
 }
 
-function	delete_movie($movies)
+function	delete_movie($movies, $pos)
 {
+	$size = get_movies_length($movies);
+	for ($i = $pos; $i < ($size - 1); $i++)
+	{
+		$movies->denumire[$i] = $movies->denumire[$i + 1];
+		$movies->aparitie[$i] = $movies->aparitie[$i + 1];
+		$movies->website[$i] = $movies->website[$i + 1];
+	}
+	$file = fopen($movies->filename, 'w');
+	for ($i = 0; $i < ($size - 1); $i++)
+	{
+		$data = $movies->denumire[$i].",".$movies->aparitie[$i].",".$movies->website[$i].","."\n";
+		fwrite($file, $data);
+	}
+	fclose($file);
 }
 ?>

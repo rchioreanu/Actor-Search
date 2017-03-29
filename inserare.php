@@ -5,7 +5,7 @@ function	add_field_actors($actors)
 {
 	while (($pos = search_actor($actors)) != -1)
 	{
-		echo "Doriti sa stergeti aceasta intrare?(Y/N)\n";
+		echo "\nDoriti sa stergeti aceasta intrare?(Y/N)\n";
 		$choice = readline("Introduceti optiunea: ");
 		if ($choice == 'Y' || $choice == 'y')
 		{
@@ -51,15 +51,26 @@ function	add_field_actors($actors)
 	if ($choice == "Y" || $choice == "y")
 	{
 		$file = fopen($actors->filename, "a");
-		$data =  $actors->nume[$i].",".$actors->prenume[$i].",".$actors->data[$i].",".$actors->nationalitate[$i].",".$actors->oras[$i].",".$actors->inaltime[$i].",".$actors->greutate[$i].",".$actors->email[$i].",".$actors->telefon[$i].",";
+		$data =  $actors->nume[$i].",".$actors->prenume[$i].",".$actors->data[$i].",".$actors->nationalitate[$i].",".$actors->oras[$i].",".$actors->inaltime[$i].",".$actors->greutate[$i].",".$actors->email[$i].",".$actors->telefon[$i].","."\n";
 		fwrite($file, $data);
 	}
 }
 
 function	add_field_movies($movies)
 {
-	while (($pos = search_movie($movies)) >= 0)
-		echo "Exista\n";
+	while (($pos = search_movie($movies)) != -1)
+	{
+		echo "\nDoriti sa stergeti aceasta intrare?(Y/N)\n";
+		$choice = readline("Introduceti optiunea: ");
+		if ($choice == 'Y' || $choice == 'y')
+		{
+			echo "stergere...\n";
+			delete_movie($movies, $pos);
+			return ;
+		}
+		else
+			echo "anulare...\n";
+	}
 	$i = get_movies_length($movies);
 	$movies->denumire[$i] = $movies->citire;
 	$aparitie = readline("Introduceti anul aparitiei: ");
@@ -80,7 +91,7 @@ function	add_field_movies($movies)
 	if ($choice == "Y" || $choice == "y")
 	{
 		$file = fopen($movies->filename, 'a');
-		$data = $movies->denumire[$i].",".$movies->aparitie[$i].",".$movies->website[$i].",";
+		$data = $movies->denumire[$i].",".$movies->aparitie[$i].",".$movies->website[$i].","."\n";
 		fwrite($file, $data);
 	}
 }

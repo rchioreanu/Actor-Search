@@ -3,8 +3,8 @@ include 'classes.php';
 include_once 'includes.php';
 $actors = new actor();
 $movies = new movie();
-@$file1 = fopen($argv[1], "r") or die("ERROR\n");
-@$file2 = fopen($argv[2], "r") or die("ERROR\n");
+@$file1 = fopen($argv[1], "r") or die("Usage: ./menu.php actors.csv movies.csv\n");
+@$file2 = fopen($argv[2], "r") or die("Usage: ./menu.php actors.csv movies.csv\n");
 if ($file1 && $file2)
 {
 	$i = 0;

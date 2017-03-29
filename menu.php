@@ -2,7 +2,7 @@
 <?php
 include_once 'includes.php';
 printf("\e[1;1H\e[2J");
-echo "Actor search v. 0.1"."\n";
+echo "Actor search v. 0.1.1"."\n";
 printf("Salut!\n\n");
 printf("Pentru a vedea detalii despre un actor apasa (1)\n");
 printf("Pentru a vedea detalii despre un film apasa (2)\n");
