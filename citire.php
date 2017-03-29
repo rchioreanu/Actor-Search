@@ -18,7 +18,10 @@ if ($file1 && $file2)
 		else
 			$actors->data[$i] = "wrong format";
 		$actors->nationalitate[$i] = $map1[3];
-		$actors->oras[$i] = $map1[4];
+		if (check_city($map1[4]))
+			$actors->oras[$i] = $map1[4];
+		else
+			$actors->oras[$i] = "wrong format";
 		if (check_height($map1[5]))
 			$actors->inaltime[$i] = $map1[5];
 		else

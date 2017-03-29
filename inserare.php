@@ -9,12 +9,12 @@ function	add_field_actors($actors)
 		$choice = readline("Introduceti optiunea: ");
 		if ($choice == 'Y' || $choice == 'y')
 		{
-			echo "stergere...\n";
+			echo "Stergere...\n";
 			delete_actor($actors, $pos);
 			return ;
 		}
-		else
-			echo "anulare...\n";
+		else if($choice == 'N' || $choice == 'n')
+			echo "Anulare...\n";
 	}
 	$i = get_actors_length($actors);
 	$actors->nume[$i] = $actors->citire;
@@ -23,8 +23,11 @@ function	add_field_actors($actors)
 	while (!check_date($data))
 		$data = readline("Introduceti data sub forma dd/mm/yyyy: ");
 	$actors->data[$i] = $data;
-	$actors->nationalitatei[$i] = readline("Introduceti nationalitatea: ");
-	$actors->oras[$i] = readline("Introduceti orasul: ");
+	$actors->nationalitate[$i] = readline("Introduceti nationalitatea: ");
+	$oras = readline("Introduceti orasul: ");
+	while (!check_city($oras))
+		$oras = readline("Introduceti orasul: ");
+	$actors->oras[$i] = $oras;
 	$inaltime = readline("Introduceti inaltimea: ");
 	while(!check_height($inaltime))
 		$inaltime = readline("Introduceti inaltimea in metri: ");	
