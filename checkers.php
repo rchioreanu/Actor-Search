@@ -74,4 +74,9 @@ function	check_date($ddmmyy)
 		return (FALSE);
 	return (TRUE);
 }
+
+function	check_movie($actors_movies, $film)
+{
+
+}
 ?>

@@ -19,7 +19,7 @@ if ($line == 0)
 }
 
 else if ($line == 1)
-	search_actor($actors);
+/*	search_actor($actors, $actors_movies); */var_dump($actors_movies);
 
 else if ($line == 2)
 	search_movie($movies);
@@ -27,7 +27,7 @@ else if ($line == 2)
 else if ($line == 3)
 {
 	$actors->filename = $argv[1];
-	add_field_actors($actors);
+	add_field_actors($actors, $actors_movies);
 }
 
 else if ($line == 4)

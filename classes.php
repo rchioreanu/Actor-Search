@@ -25,4 +25,16 @@ class	movie
 	public	$citire;
 	public	$filename;
 }
+
+class	actor_movie
+{
+	public	$movie;
+	public	$actors;
+}
+
+class	movie_actor 
+{
+	public	$actor;
+	public	$movies;
+}
 ?>

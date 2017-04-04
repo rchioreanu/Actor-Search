@@ -1,9 +1,9 @@
 <?php
 include_once 'includes.php';
 
-function	add_field_actors($actors)
+function	add_field_actors($actors, $actors_movies)
 {
-	while (($pos = search_actor($actors)) != -1)
+	while (($pos = search_actor($actors,$actors_movies)) != -1)
 	{
 		echo "\nDoriti sa stergeti aceasta intrare?(Y/N)\n";
 		$choice = readline("Introduceti optiunea: ");
@@ -38,12 +38,24 @@ function	add_field_actors($actors)
 	$actors->greutate[$i] = $greutate;
 	$email = readline("Introduceti email-ul: ");
 	while(!check_email($email))
-		$mail = readline("Introduceti email-ul: ");
+		$email = readline("Introduceti email-ul: ");
 	$actors->email[$i] = $email;
 	$telefon = readline("Introduceti numarul de telefon: ");
 	while (!check_phone($telefon))
 		$telefon = readline("Introduceti numarul de telefon: ");
 	$actors->telefon[$i] = $telefon;
+	$j = 0;
+	$file = fopen("tmp.csv", "a");
+	fwrite($file, $actors->nume[$i].",");
+	while ($tmp = readline("Introduceti filmul/filmele in care a jucat separate de enter: "))
+	{
+		$actors_movies->movie[$i][$j] = $tmp;
+		$data =  $actors_movies->movie[$i][$j].",";
+		fwrite($file, $data);
+		$j++;
+	}
+	fwrite($file, "\n");
+	fclose($file);
 	echo "\nDoriti sa salvati in fisier?(y/n)\n";
 	$choice = readline("Introduceti optiunea dumneavoastra: ");
 	if ($choice == "N" || $choice == "n")
