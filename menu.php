@@ -38,5 +38,7 @@ else if ($line == 4)
 }
 
 else if ($line == 5)
-	shell_exec("sh unit_tests.sh");
+{
+	echo shell_exec("sh unit_tests.sh");
+}
 ?>
