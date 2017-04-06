@@ -1,5 +1,4 @@
 <?php
-include_once 'includes.php';
 function	check_height($height)
 {
 	if (!preg_match('/^[0-2]\.([0-9]?[0-9]?[0-9])$/', $height, $matches))
@@ -73,10 +72,5 @@ function	check_date($ddmmyy)
 		|| $date[1] == 11 || $date[1]) && $date[0] > 30)
 		return (FALSE);
 	return (TRUE);
-}
-
-function	check_movie($actors_movies, $film)
-{
-
 }
 ?>
