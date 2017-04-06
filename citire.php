@@ -4,9 +4,11 @@ include_once 'includes.php';
 $actors = new actor();
 $movies = new movie();
 $actors_movies = new actor_movie();
+$movies_actors = new movie_actor();
 @$file1 = fopen($argv[1], "r") or die("Usage: ./menu.php actors.csv movies.csv\n");
 @$file2 = fopen($argv[2], "r") or die("Usage: ./menu.php actors.csv movies.csv\n");
 @$file3 = fopen("tmp.csv", "r");
+@$file4 = fopen("tmp2.csv", "r");
 if ($file1 && $file2)
 {
 	$i = 0;
@@ -66,6 +68,7 @@ if ($file1 && $file2)
 	@fclose($file1);
 	@fclose($file2);
 }
+
 if ($file3)
 {
 	$i = 0;
@@ -94,7 +97,36 @@ if ($file3)
 			$i++;
 		}
 	}
-	var_dump($actors_movies);
+}
+
+if ($file4)
+{
+	$i = 0;
+	while (($line = fgets($file4)) != FALSE)
+	{
+		$tmp = explode(",", trim($line, "\n"));
+		$ok = 1;
+		$l = 0;
+		while ($movies_actors->movies[$l])
+		{
+			if ($tmp[0] == $movies_actors->movies[$l])
+				$ok = 0;
+			$l++;
+		}
+		if ($ok == 1)
+		{
+			$movies_actors->movies[$i] = $tmp[0];
+			$j = 0;
+			$k = 1;
+			while ($tmp[$k])
+			{
+				$movies_actors->actor[$i][$j] = $tmp[$k];
+				$k++;
+				$j++;
+			}
+			$i++;
+		}
+	}
 }
 
 ?>

@@ -2,7 +2,7 @@
 <?php
 include_once 'includes.php';
 printf("\e[1;1H\e[2J");
-echo "Actor search v. 0.1.1"."\n";
+echo "Actor search v. 0.2"."\n";
 printf("Salut!\n\n");
 printf("Pentru a vedea detalii despre un actor apasa (1)\n");
 printf("Pentru a vedea detalii despre un film apasa (2)\n");
@@ -19,10 +19,10 @@ if ($line == 0)
 }
 
 else if ($line == 1)
-/*	search_actor($actors, $actors_movies); */var_dump($actors_movies);
+	search_actor($actors, $actors_movies);
 
 else if ($line == 2)
-	search_movie($movies);
+	search_movie($movies, $movies_actors);
 
 else if ($line == 3)
 {
@@ -33,6 +33,6 @@ else if ($line == 3)
 else if ($line == 4)
 {
 	$movies->filename = $argv[2];
-	add_field_movies($movies);
+	add_field_movies($movies, $movies_actors);
 }
 ?>

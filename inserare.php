@@ -45,7 +45,7 @@ function	add_field_actors($actors, $actors_movies)
 		$telefon = readline("Introduceti numarul de telefon: ");
 	$actors->telefon[$i] = $telefon;
 	$j = 0;
-	$file = fopen("tmp.csv", "a");
+	@$file = fopen("tmp.csv", "a");
 	fwrite($file, $actors->nume[$i].",");
 	while ($tmp = readline("Introduceti filmul/filmele in care a jucat separate de enter: "))
 	{
@@ -71,9 +71,9 @@ function	add_field_actors($actors, $actors_movies)
 	}
 }
 
-function	add_field_movies($movies)
+function	add_field_movies($movies, $movies_actors)
 {
-	while (($pos = search_movie($movies)) != -1)
+	while (($pos = search_movie($movies, $movies_actors)) != -1)
 	{
 		echo "\nDoriti sa stergeti aceasta intrare?(Y/N)\n";
 		$choice = readline("Introduceti optiunea: ");
@@ -96,6 +96,18 @@ function	add_field_movies($movies)
 	while (!check_website($website))
 		$website = readline("Introduceti website-ul: ");
 	$movies->website[$i] = $website;
+	$j = 0;
+	@$file = fopen("tmp2.csv", "a");
+	fwrite($file, $movies->denumire[$i].",");
+	while ($tmp = readline("Introduceti actorul/actorii care joaca in film separati de enter: "))
+	{
+		$movies_actors->actor[$i][$j] = $tmp;
+		$data =  $movies_actors->actor[$i][$j].",";
+		fwrite($file, $data);
+		$j++;
+	}
+	fwrite($file, "\n");
+	fclose($file);
 	echo "\nDoriti sa salvati in fisier?(y/n)\n";
 	$choice = readline("Introduceti optiunea dumneavoastra: ");
 	if ($choice == "N" || $choice == "n")

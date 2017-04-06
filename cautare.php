@@ -30,17 +30,20 @@ function	search_actor($actors, $actors_movies)
 				}
 				$k++;
 			}
-			$l = 1;
+			$l = 0;
 			if ($ok2 == 1)
 			{
-				while ($actors_movies->movies[$k][$l])
+				echo "Filmele in care joaca actorul: ";
+				while ($actors_movies->movie[$k][$l])
 				{
-					echo $actors_movies->movies[$k][$l].",";
+					$tmp .= $actors_movies->movie[$k][$l].", ";
 					$l++;
 				}
+				$tmp = rtrim($tmp,", ");
+				echo $tmp."\n";
 			}
 			else
-				echo "Nu joaca in filme! ";
+				echo "Nu joaca in filme!\n";
 			return ($i);
 		}
 	}
@@ -48,7 +51,7 @@ function	search_actor($actors, $actors_movies)
 		return (-1);
 }
 
-function	search_movie($movies)
+function	search_movie($movies, $movies_actors)
 {
 	$film = readline("Introduceti numele filmului (case insensitive): ");
 	$movies->citire = $film;
@@ -56,14 +59,39 @@ function	search_movie($movies)
 	{
 		if (strcasecmp($film, $movies->denumire[$i]) == 0)
 		{
+			$ok = 1;
 			echo "Denumire: ".$movies->denumire[$i]."\n";
 			echo "An aparitie: ".$movies->aparitie[$i]."\n";
 			echo "Website: ".$movies->website[$i]."\n";
-			$ok = 1;
+			$ok2 = 0;
+			$k = 0;
+			while ($movies_actors->movies[$k])
+			{
+				if (strcasecmp($movies_actors->movies[$k], $movies->denumire[$i]) == 0)
+				{
+					$ok2 = 1;
+					break;
+				}
+				$k++;
+			}
+			$l = 0;
+			if ($ok2 == 1)
+			{
+				echo "Actorii care joaca in film: ";
+				while ($movies_actors->actor[$k][$l])
+				{
+					$tmp .= $movies_actors->actor[$k][$l].", ";
+					$l++;
+				}
+				$tmp = rtrim($tmp,", ");
+				echo $tmp."\n";
+			}
+			else
+				echo "Nu sunt actori!\n";
 			return ($i);
 		}
 	}
 	if ($ok == 0)
-		return (-1);
+	return (-1);
 }
 ?>
