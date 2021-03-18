@@ -1,3 +1,3 @@
 # workshop_actors
 
-Pentru a rula, executati menu.php impreuna cu cele 2 fisiere, date ca parametru
+Pentru a rula, executați menu.php împreuna cu cele 2 fișiere, date ca parametru
